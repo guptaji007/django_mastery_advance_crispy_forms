@@ -52,3 +52,12 @@ class CandidateForm(forms.ModelForm):
         # fields = ['firstname', 'lastname', 'email', 'age', 'message']
         # exclude = ['firstname', 'lastname', 'email', 'age', 'message']
         
+        # Outside Widget
+        widgets = {
+            'phone': forms.TextInput(
+                attrs={'style':'font-size: 13px', 
+                       'placeholder': 'Phone',
+                       'data-mask': '(00) 00000-00000'
+                }
+            )
+        }
