@@ -8,6 +8,10 @@ from django.utils.html import format_html
 class CandidateAdmin(admin.ModelAdmin):
     radio_fields = {"smoker": admin.HORIZONTAL}
     form = CandidateForm
+    readonly_fields = ['experience', 'firstname', 'lastname', 'job', 'email', 'age', 'phone', 
+                       'salary', 'personality', 'gender', 'smoker', 'file', 
+                       'frameworks', 'languages', 'libraries', 'mobile', 'others','message']
+    exclude = ['status']
     list_filter = ['Situation']
     list_display = ['firstname', 'lastname', 'job', 'email', 'age', 'created_at', 'status', '_']
     search_fields = ['firstname', 'lastname', 'email', 'age', 'Situation']

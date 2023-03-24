@@ -1,9 +1,10 @@
 from django.db import models
+from multiselectfield import MultiSelectField
 
 SITUATION = (
     ('Pending', 'Pending'),
     ('Approved', 'Approved'),
-    ('Dispproved', 'Dispproved'),
+    ('Rejected', 'Rejected'),
 )
 
 PERSONALITY = (
@@ -18,6 +19,61 @@ PERSONALITY = (
 SMOKER = (
     ('1', 'Yes'),
     ('2', 'No'),
+)
+
+# MULTIPLE CHECKBOXES CHOICES
+FRAMEWORKS = (
+    ('Laravel', 'Laravel'),
+    ('Angular', 'Angular'),
+    ('Django', 'Django'),
+    ('Flask', 'Flask'),
+    ('Vue', 'Vue'),
+    ('Others', 'Others'),
+)
+
+LANGUAGES = (
+    ('Python', 'Python'),
+    ('Javascript', 'Javascript'),
+    ('Java', 'Java'),
+    ('C++', 'C++'),
+    ('Ruby', 'Ruby'),
+    ('Others', 'Others'),
+)
+
+DATABASES = (
+    ('Mysql', 'Mysql'),
+    ('Postgres', 'Postgres'),
+    ('MongoDB', 'MongoDB'),
+    ('Sqlite3', 'Sqlite3'),
+    ('Oracle', 'Oracle'),
+    ('Others', 'Others'),
+)
+
+LIBRARIES = (
+    ('Ajax', 'Ajax'),
+    ('Jquery', 'Jquery'),
+    ('React.js', 'React.js'),
+    ('Chart.js', 'Chart.js'),
+    ('Gsap', 'Gsap'),
+    ('Others', 'Others'),
+)
+
+MOBILE = (
+    ('React native', 'React native'),
+    ('Kivy', 'Kivy'),
+    ('Flutter', 'Flutter'),
+    ('Ionic', 'Ionic'),
+    ('Xamarim', 'Xamarim'),
+    ('Others', 'Others'),
+)
+
+OTHERS = (
+    ('UML', 'UML'),
+    ('SQL', 'SQL'),
+    ('Docker', 'Docker'),
+    ('GIT', 'GIT'),
+    ('GraphQL', 'GraphQL'),
+    ('Others', 'Others'),
 )
 
 # Create your models here.
@@ -37,6 +93,13 @@ class Candidate(models.Model):
     file = models.FileField()
     created_at = models.DateTimeField(auto_now_add=True)
     Situation = models.CharField(max_length=50, null=True, choices=SITUATION, default='Pending') 
+    # Multiple Checkboxes
+    frameworks = MultiSelectField(choices=FRAMEWORKS, default="")
+    languages = MultiSelectField(choices=LANGUAGES, default="")
+    databases = MultiSelectField(choices=DATABASES, default="")
+    libraries = MultiSelectField(choices=LIBRARIES, default="")
+    mobile = MultiSelectField(choices=MOBILE, default="")
+    others = MultiSelectField(choices=OTHERS, default="")
 
     def __str__(self):
         return self.firstname

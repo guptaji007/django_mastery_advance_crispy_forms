@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    # Custom Django Admin https://pypi.org/project/django-jazzmin/
     'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -39,7 +40,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'App',
-    'django_cleanup',
+    # Multi-Select Library https://pypi.org/project/django-multiselectfield/
+    'multiselectfield',
+    # To Automactically Clean Files of Model from Database https://pypi.org/project/django-cleanup/
+    'django_cleanup', 
+    # Crispy Forms using Bootstrap 5 https://pypi.org/project/crispy-bootstrap5/
     "crispy_forms",
     "crispy_bootstrap5",
 ]
