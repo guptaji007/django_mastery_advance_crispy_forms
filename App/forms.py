@@ -1,5 +1,5 @@
 from django import forms
-from .models import Candidate
+from .models import Candidate, SMOKER
 from django.core.validators import RegexValidator
 
 # Every Letter to LowerCase
@@ -53,24 +53,48 @@ class CandidateForm(forms.ModelForm):
         # required=False,
         widget=forms.TextInput(attrs={'placeholder':'Age'})
     )
+    experience = forms.BooleanField(label='I have experience', required=False)
     message = forms.CharField(
         label='About you', min_length=50, max_length=1000,
         required=False,
         widget=forms.Textarea(
-            attrs={'placeholder':'Talk a little about you', 'rows':5}
+            attrs={'placeholder':'Talk a little about you', 'rows':3}
         )
     )
+    # Method 1 (Gender)
+    # GENDER = [('M', 'Male'), ('F', ('Female'))]
+    # gender = forms.CharField(label='Gender', widget=forms.RadioSelect(choices=GENDER))
 
     class Meta:
         model = Candidate
         exclude = ['created_at', 'Situation']
-        
-        # Outside Widget
+
+        SALARY = (
+            ('', ('Salary expectation (month)')),
+            ('Between ($1000 and $2000)', ('Between ($1000 and $2000)')),
+            ('Between ($2000 and $3000)', ('Between ($2000 and $3000)')),
+            ('Between ($3000 and $4000)', ('Between ($3000 and $4000)')),
+            ('Between ($4000 and $5000)', ('Between ($4000 and $5000)')),
+        )
+        # Method 2 Inside Meta Class for Gender
+        GENDER = [('M', 'Male'), ('F', ('Female'))]
+
+        # OUTSIDE WIDGETS
         widgets = {
+            # Phone
             'phone': forms.TextInput(
                 attrs={'style':'font-size: 13px', 
                        'placeholder': '(91) 99988-77766',
                        'data-mask': '(00) 00000-00000'
                 }
-            )
+            ),
+            # Salary
+            'salary': forms.Select(
+                choices=SALARY,
+                attrs={
+                    'class':'form-control', # Bootstrap inside the forms.py
+                }
+            ), 
+            'gender': forms.RadioSelect(choices=GENDER, attrs={'class': 'btn-check'}),
+            'smoker': forms.RadioSelect(choices=SMOKER, attrs={'class': 'btn-check'}),
         }

@@ -1,10 +1,13 @@
 from django.contrib import admin
 from .models import Candidate
+from .forms import CandidateForm
 from django.utils.html import format_html
 
 
 # Register your models here.
 class CandidateAdmin(admin.ModelAdmin):
+    radio_fields = {"smoker": admin.HORIZONTAL}
+    form = CandidateForm
     list_filter = ['Situation']
     list_display = ['firstname', 'lastname', 'job', 'email', 'age', 'created_at', 'status', '_']
     search_fields = ['firstname', 'lastname', 'email', 'age', 'Situation']
