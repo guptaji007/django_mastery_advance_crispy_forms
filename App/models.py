@@ -101,10 +101,15 @@ class Candidate(models.Model):
     mobile = MultiSelectField(choices=MOBILE, default="")
     others = MultiSelectField(choices=OTHERS, default="")
 
+    # Concatenate Name when clicking over the candidates in Admin Panel
     def __str__(self):
-        return self.firstname
+        return self.firstname + ' ' + self.lastname
     
     # Capitalize (First and Last Name)
     def clean(self):
         self.firstname = self.firstname.capitalize()
         self.lastname = self.lastname.capitalize()
+
+    # Concatenate First and Last Name (Admin Table / Panel)
+    def name(obj):
+        return "%s %s" % (obj.firstname, obj.lastname)
