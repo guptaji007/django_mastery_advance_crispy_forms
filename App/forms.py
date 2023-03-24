@@ -68,6 +68,14 @@ class CandidateForm(forms.ModelForm):
     class Meta:
         model = Candidate
         exclude = ['created_at', 'Situation']
+        # Labels Control
+        labels = {
+            # 'phone':'You Phone',
+            # 'personality':'Your personality',
+            # 'salary':'Choose a salary',
+            'gender':'Your gender',
+            'smoker':'Do you smoker?',
+        }
 
         SALARY = (
             ('', ('Salary expectation (month)')),
@@ -98,3 +106,34 @@ class CandidateForm(forms.ModelForm):
             'gender': forms.RadioSelect(choices=GENDER, attrs={'class': 'btn-check'}),
             'smoker': forms.RadioSelect(choices=SMOKER, attrs={'class': 'btn-check'}),
         }
+
+    # SUPER FUNCTION
+    def __init__(self, *args, **kwargs):
+        super(CandidateForm, self).__init__(*args, **kwargs)
+
+        # =========== CONTROL PANEL (Optional Method to Control) ===========#
+        # Input required
+        # self.fields['experience'].required = True
+
+        #  Input Disabled
+        # self.fields['experience'].disabled = False
+        
+        #  Input Readonly
+        # self.fields['email'].widget.attrs.update({'readonly':'readonly'})
+
+        # =========== SELECT OPTION ===========#
+        self.fields['personality'].choices = [('', 'Select a personality'),] + list(self.fields['personality'].choices)[1:]
+            
+        # =========== WIDGET CONTROL ===========#
+        # self.fields['phone'].widget.attrs.update({'style':'font-size: 18px', 'placeholder': 'No Phone', 'data-mask': '(00) 00-00'})
+        
+        # =========== READONLY / DISABLED BY 'LOOP FOR' IN [ARRAY] ===========#
+        # 1) Readonly
+        # readonly = ['firstname', 'lastname', 'job', 'email', 'age', 'phone']
+        # for field in readonly:
+        #     self.fields[field].widget.attrs['readonly'] = 'true'
+
+        # 2) Disabled
+        # disabled = ['personality', 'salary', 'gender', 'smoker', 'experience']
+        # for field in disabled:
+        #     self.fields[field].widget.attrs['disabled'] = 'true'
