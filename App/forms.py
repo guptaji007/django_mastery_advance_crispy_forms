@@ -19,6 +19,8 @@ class CandidateForm(forms.ModelForm):
         label='First name', min_length=3, max_length=50,
         validators=[RegexValidator(r'^[a-zA-ZÀ-ÿ\s]*$', 
         message="Only Letters is Allowed!")],
+        # Method 1 to replace native error message with custom message
+        error_messages={'required': 'First Name cannot be Empty.'},
         # required=False,
         widget=forms.TextInput(attrs={
             'placeholder':'First name',
@@ -64,6 +66,8 @@ class CandidateForm(forms.ModelForm):
         label='Your age', min_length=2, max_length=3,
         validators=[RegexValidator(r'^[0-9]*$', 
         message="Only numbers is Allowed!")],
+        # Method 1 to replace native error message with custom message
+        error_messages={'required': 'Age field cannot be Empty.'},
         # required=False,
         widget=forms.TextInput(attrs={
             'placeholder':'Age', 
@@ -159,6 +163,11 @@ class CandidateForm(forms.ModelForm):
         # 5) WIDGETS CONTROL (INSIDE / OUTSIDE)
         # self.fields['phone'].widget.attrs.update({'style':'font-size: 18px', 'placeholder': 'No Phone', 'data-mask': '(00) 00-00'})
         
+        # 6) ERROR MESSAGES
+        # Method 2 to replace native error message with custom message
+        # self.fields['firstname'].error_messages.update({
+        #     'required': 'Django Mastery Channel'
+        # })
 
         # =========== ADVANCED CONTROL PANEL | MULTIPLE INPUTS BY 'LOOP FOR' IN [ARRAY] ===========#
         # 1) READONLY
@@ -170,6 +179,18 @@ class CandidateForm(forms.ModelForm):
         # disabled = ['personality', 'salary', 'gender', 'smoker', 'experience']
         # for field in disabled:
         #     self.fields[field].widget.attrs['disabled'] = 'true'
+
+        # 3) ERROR MESSAGES
+        # Method 3 to replace native error message with custom message
+        # error_messages = ['firstname', 'lastname', 'job', 'email', 'age', 'phone', 'personality', 'salary', 'gender', 'smoker']
+        # for field in error_messages:
+        #     self.fields[field].error_messages.update({'required': 'Django Mastery Channel'})
+
+        # 4) FONT SIZE
+        # font_size = ['firstname', 'lastname', 'job', 'email', 'age', 'phone', 'personality', 'salary']
+        # for field in font_size:
+        #     self.fields[field].widget.attrs.update({'style': 'font-size: 18px'})
+
     # ---------- END of SUPER FUNCTION -----------------------
 
     # FUNCTION TO PREVENT DUPLICATED ENTRIES
