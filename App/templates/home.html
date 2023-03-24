@@ -6,7 +6,7 @@
     <div class="card p-1 border-dark text-center" style="font-size: 18px;">
         Frontend: FR-22 &nbsp;|&nbsp; Backend: BA-10 &nbsp;|&nbsp; Fullstack: FU-15
     </div>
-    <form method="POST" class="card p-3 mt-3" autocomplete="off" novalidate>
+    <form method="POST" enctype="multipart/form-data" class="card p-3 mt-3" autocomplete="off" novalidate>
         {% csrf_token %}
         <div class="row">
             <div class="col-4">{{ form.firstname|as_crispy_field }}</div>
@@ -26,7 +26,8 @@
         </div>
         {{ form.experience|as_crispy_field }}
         {{ form.message|as_crispy_field }}
-        <button type="submit" class="btn btn-outline-primary mt-1" style="width: 90px;">Submit</button>
+        {{ form.file|as_crispy_field }}
+        <button type="submit" class="btn btn-sm btn-outline-primary mt-1" style="width: 90px;">Submit</button>
     </form>
 
     <!-- Message from Backend -->
